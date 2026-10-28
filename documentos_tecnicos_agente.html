@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Especificación Técnica y Plan de Implementación - Agente IA para Agencia de Diseño</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
+        h1, h2, h3 { color: #1a365d; margin-top: 1.5em; }
+        h1 { border-bottom: 2px solid #2b6cb0; padding-bottom: 10px; margin-top: 0; }
+        h2 { border-bottom: 1px solid #e2e8f0; padding-bottom: 5px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background: #fff; }
+        th, td { border: 1px solid #cbd5e0; padding: 12px; text-align: left; }
+        th { background-color: #ebf8ff; color: #2b6cb0; }
+        tr:nth-child(even) { background-color: #f7fafc; }
+        .badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.85em; font-weight: bold; background: #e2e8f0; }
+        .badge-openai { background: #d1fae5; color: #065f46; }
+        .badge-anthropic { background: #dbeafe; color: #1e40af; }
+        .badge-python { background: #fef3c7; color: #92400e; }
+        pre { background: #1e293b; color: #f8fafc; padding: 15px; border-radius: 6px; overflow-x: auto; font-size: 0.9em; }
+        .container { background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Especificación Completa del Sistema Multi-Agente de IA</h1>
+    <p><strong>Documento Unificado: PRD, TRD y Plan de Implementación Cronometrado</strong></p>
+    <p>Este documento contiene toda la arquitectura conceptual, técnica y el cronograma preciso para el desarrollo del sistema automatizado de captación, estrategia de contenidos y generación de motion graphics mediante orquestación híbrida de LLMs (CrewAI, OpenAI y Anthropic Claude).</p>
+
+    <hr>
+
+    <h2>1. PRD (Product Requirement Document)</h2>
+    <h3>1.1. Visión del Producto</h3>
+    <p>Automatizar los flujos operativos repetitivos y creativos de una agencia de diseño moderna. El sistema busca prospectar inteligentemente clientes potenciales con deficiencias digitales, generar estrategias personalizadas de contenido, y delegar la conceptualización de Motion Graphics de manera automática y estructurada.</p>
+    
+    <h3>1.2. Objetivos Principales</h3>
+    <ul>
+        <li><strong>Reducción de Tiempos Creativos:</strong> Pasar de 5 días a un promedio de 4 horas en la estructuración de propuestas de contenido y wireframes visuales.</li>
+        <li><strong>Prospección Autónoma:</strong> Identificar un mínimo de 3 a 5 prospectos comerciales altamente cualificados por ciclo de ejecución sin intervención humana manual.</li>
+        <li><strong>Automatización del Alcance:</strong> Redactar correos personalizados listos para enviar por SMTP conteniendo el presupuesto estimado.</li>
+    </ul>
+
+    <h3>1.3. Perfiles de Agentes (Estructura de la Crew)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Agente</th>
+                <th>Rol / Misión</th>
+                <th>LLM Motor</th>
+                <th>Output Esperado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Prospector Comercial</strong></td>
+                <td>Escanear la web en nichos específicos detectando debilidades de marca y diseño.</td>
+                <td><span class="badge badge-openai">GPT-4o-mini</span></td>
+                <td>Diccionario con datos del cliente y análisis de fallas en su presencia digital.</td>
+            </tr>
+            <tr>
+                <td><strong>Estratega de Contenidos</strong></td>
+                <td>Desarrollar la estrategia narrativa, pilares de contenido y conceptos visuales.</td>
+                <td><span class="badge badge-anthropic">Claude 3.5 Sonnet</span></td>
+                <td>Guión técnico desglosado con especificaciones estéticas detalladas.</td>
+            </tr>
+            <tr>
+                <td><strong>Director de Motion/Video</strong></td>
+                <td>Traducir la estrategia en código reproducible de animación para generar videos.</td>
+                <td><span class="badge badge-anthropic">Claude 3.5 Sonnet</span></td>
+                <td>Código nativo estructurado (Remotion / JavaScript o Manim / Python).</td>
+            </tr>
+            <tr>
+                <td><strong>Ejecutivo de Cuentas</strong></td>
+                <td>Consolidar la información, estimar costos y automatizar el correo de contacto.</td>
+                <td><span class="badge badge-openai">GPT-4o-mini</span></td>
+                <td>Email persuasivo personalizado e inyección en el módulo SMTP.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>2. TRD (Technical Requirements Document)</h2>
+    <h3>2.1. Stack Tecnológico</h3>
+    <ul>
+        <li><strong>Lenguaje Base:</strong> Python 3.11 o superior.</li>
+        <li><strong>Framework Principal:</strong> CrewAI + CrewAI Tools (para el manejo nativo del flujo asíncrono y secuencial).</li>
+        <li><strong>Conectores API:</strong> Anthropic API SDK (`anthropic`), OpenAI API SDK (`openai`), y Serper.dev API para búsquedas en Google.</li>
+        <li><strong>Motor de Video de Destino:</strong> Remotion (Node.js/React) o Manim (Python Community Edition). Se selecciona <strong>Manim</strong> para este documento por consistencia directa con el entorno nativo del agente.</li>
+    </ul>
+
+    <h3>2.2. Arquitectura de Directorios (Repositorio Listo para GitHub)</h3>
+    <pre>agencia-diseno-crew/
+├── .gitignore               # Ignora venv/, .env, __pycache__/ y salidas de renderizado (.mp4)
+├── README.md                # Instrucciones de configuración, variables y comandos de ejecución
+├── requirements.txt         # Dependencias: crewai, crewai-tools, python-dotenv, manim, openai, anthropic
+├── .env                     # Archivo local de credenciales (OPENAI_API_KEY, ANTHROPIC_API_KEY, SERPER_API_KEY)
+├── main.py                  # Script principal que gatilla el flujo pasando las variables (kickoff)
+└── src/
+    ├── __init__.py
+    ├── crew.py              # Clase constructora que inicializa agentes y asigna tareas de forma modular
+    ├── config/
+    │   ├── agents.yaml      # Definición de roles, metas y trasfondos psicológicos (backstories)
+    │   └── tasks.yaml       # Definición de requerimientos detallados y outputs esperados por cada tarea
+    └── tools/
+        ├── __init__.py
+        ├── email_tool.py    # Módulo de envío SMTP mediante el protocolo nativo smtplib de Python
+        └── video_tool.py    # Interfaz para compilar y guardar el código generado por Claude</pre>
+
+    <h3>2.3. Gestión de Datos y Seguridad</h3>
+    <ul>
+        <li><strong>Protección de API Keys:</strong> El archivo `.gitignore` debe prohibir estrictamente la indexación del archivo `.env`.</li>
+        <li><strong>Manejo de Errores e Iteración Limitada:</strong> Todos los agentes que tengan acceso a herramientas de navegación (Serper) deben tener la bandera `max_iter=3` configurada de forma estricta para mitigar bucles infinitos de consumo en producción.</li>
+    </ul>
+
+    <hr>
+
+    <h2>2.4 Estrategia de Conexión a Plataforma de Video (Claude API)</h2>
+    <p>Para lograr la interacción fluida con la plataforma de video por código, el Agente Director de Motion pasará las especificaciones del guión creativo a una instancia directa de Claude 3.5 Sonnet a través de su API estructurada, solicitando explícitamente código ejecutable sin explicaciones textuales externas.</p>
+    <p>A continuación se define el código core del adaptador que se integrará dentro del directorio de <code>src/tools/video_tool.py</code>:</p>
+
+<pre>import anthropic
+import os
+
+def generar_codigo_animacion(guion_estratega: str) -> str:
+    """
+    Llama directamente a la API de Anthropic Claude 3.5 Sonnet para traducir
+    el guión estratégico de la agencia en código de animación limpio para Manim (Python).
+    """
+    client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+    
+    prompt_sistema = (
+        "Eres un programador experto en animaciones de Motion Graphics usando la librería Manim de Python. "
+        "Tu única tarea es recibir un guión y transformarlo en código de Python funcional estructurado en una clase "
+        "que herede de 'Scene'. Devuelve EXCLUSIVAMENTE el código limpio dentro de bloques de marcado, sin introducciones ni textos de saludo."
+    )
+    
+    response = client.messages.create(
+        model="claude-3-5-sonnet-20241022",
+        max_tokens=4000,
+        temperature=0.2,
+        system=prompt_sistema,
+        messages=[
+            {"role": "user", "content": f"Por favor genera la animación para el siguiente guión de diseño:\n{guion_estratega}"}
+        ]
+    )
+    
+    return response.content[0].text</pre>
+
+    <hr>
+
+    <h2>3. Plan de Implementación y Tiempos de Desarrollo</h2>
+    <p>Tomando en cuenta que cuentas con conocimientos previos en Python, la duración estimada total para un Producto Mínimo Viable (MVP) es de <strong>21 a 28 días corridos</strong> dedicando una carga horaria estimada de 2 horas al día.</p>
+
+    <h3>3.1. Cronograma Semanal Detallado</h3>
+
+    <h4>Semana 1: Infraestructura Base y Repositorio Seguro (Días 1 a 7)</h4>
+    <ul>
+        <li><strong>Día 1-2:</strong> Inicialización del entorno con VS Code, creación del entorno virtual (`venv`) e instalación de las dependencias troncales.</li>
+        <li><strong>Día 3-4:</strong> Diseño del archivo `.gitignore` y vinculación del proyecto inicial a un repositorio privado de GitHub.</li>
+        <li><strong>Día 5-7:</strong> Alta de credenciales en las plataformas (OpenAI, Anthropic y Serper.dev) y testeo de conectividad de los scripts aislados en la carpeta `config/`.</li>
+    </ul>
+
+    <h4>Semana 2: Arquitectura del Equipo de Agentes y Modelado YAML (Días 8 a 14)</h4>
+    <ul>
+        <li><strong>Día 8-10:</strong> Redacción precisa de las identidades de los agentes en el archivo `agents.yaml`. Ajuste de temperaturas y asignación de LLMs correctos.</li>
+        <li><strong>Día 11-12:</strong> Definición de las dependencias secuenciales de las tareas dentro del archivo `tasks.yaml`.</li>
+        <li><strong>Día 13-14:</strong> Primeras pruebas locales en consola con un flujo simulado para validar que el Prospector le entrega los datos de forma limpia al Estratega de Contenido.</li>
+    </ul>
+
+    <h4>Semana 3: Integración de la API de Claude y Generación de Videos (Días 15 a 21)</h4>
+    <ul>
+        <li><strong>Día 15-17:</strong> Implementación del adaptador de la API de Anthropic dentro de las herramientas personalizadas del agente (`src/tools/video_tool.py`).</li>
+        <li><strong>Día 18-19:</strong> Configuración del entorno local de renderizado de video (instalación de FFmpeg y dependencias del sistema operativo para Manim o Node.js).</li>
+        <li><strong>Día 20-21:</strong> Pruebas de extracción de código. Ajuste de prompts del sistema de Claude para asegurar que la salida de la animación no contenga errores de sintaxis en tiempo de ejecución.</li>
+    </ul>
+
+    <h4>Semana 4: Módulo de Envío y Despliegue en Producción (Días 22 a 28)</h4>
+    <ul>
+        <li><strong>Día 22-24:</strong> Codificación del módulo SMTP seguro en `src/tools/email_tool.py`. Conexión de variables dinámicas provenientes del agente Ejecutivo de Cuentas.</li>
+        <li><strong>Día 25-26:</strong> Pruebas de fin a fin (End-to-End Test): desde la búsqueda del prospecto en Google hasta el correo final redactado en bandeja de salida y el video piloto guardado localmente.</li>
+        <li><strong>Día 27-28:</strong> Refactorización final del código, subida de la versión definitiva del MVP estable a la rama principal (`main`) en GitHub y documentación final en el archivo `README.md`.</li>
+    </ul>
+</div>
+</body>
+</html>
