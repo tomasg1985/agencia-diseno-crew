@@ -3,7 +3,8 @@ from src.crew import AgenciaDisenoCrew
 def iniciar_agente_local():
     # Definimos el nicho que queremos analizar de manera dinámica
     inputs = {
-        'nicho': 'Consultorios Dentales Locales'
+        'nicho': 'Consultorios Dentales Locales',
+        'presupuesto_base': '1200'
     }
     
     print("🤖 Iniciando el Agente Prospectador en tu máquina...")

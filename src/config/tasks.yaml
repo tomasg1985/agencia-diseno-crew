@@ -3,6 +3,30 @@ buscar_clientes_tarea:
     Analiza el nicho de {nicho} e identifica un tipo de problema de diseño común que sufran estos negocios. 
     Propón una estrategia de búsqueda para encontrar 3 clientes ideales que necesiten ayuda.
   expected_output: >-
-    Un reporte estructurado en texto que contenga: 1. El problema principal de diseño en el nicho. 
-    2. Tres criterios clave para calificar si una web de este nicho es deficiente. 3. Una idea de propuesta de valor.
+    Un reporte estructurado que contenga: 1. El problema principal de diseño en el nicho. 
+    2. Tres criterios clave para calificar si una web de este nicho es deficiente.
   agent: prospectador_agente
+
+crear_estrategia_tarea:
+  description: >-
+    Toma el reporte de prospección anterior. Crea un concepto creativo para una campaña de video 
+    e incluye un guión técnico corto de 15 segundos diseñado para solucionar ese problema detectado.
+  expected_output: >-
+    Un guión técnico estructurado con: Tiempo (0-15s), Escena Visual, y Texto/Narración en pantalla.
+  agent: estratega_contenido_agente
+
+generar_codigo_motion_tarea:
+  description: >-
+    Toma el guión técnico anterior. Genera la estructura lógica paso a paso para crear un video en Python con la librería Manim. 
+    Define los objetos que deben aparecer (círculos, textos, transiciones) y el orden de ejecución del script de animación.
+  expected_output: >-
+    Un plan técnico detallado que enumere las clases, variables y métodos necesarios para codificar el video.
+  agent: director_motion_agente
+
+preparar_presupuesto_tarea:
+  description: >-
+    Toma todo el contexto del caso (el problema, el guión y el plan de video). Redacta un correo electrónico frío de ventas ultra-personalizado 
+    dirigido al dueño del consultorio, ofreciéndole esta solución por un presupuesto base de {presupuesto_base} USD.
+  expected_output: >-
+    Un correo electrónico de ventas redactado listo para producción, con Asunto y Cuerpo del mensaje, en un tono persuasivo pero corporativo.
+  agent: ejecutivo_cuentas_agente
