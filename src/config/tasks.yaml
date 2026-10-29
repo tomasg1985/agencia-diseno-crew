@@ -1,0 +1,8 @@
+buscar_clientes_tarea:
+  description: >-
+    Analiza el nicho de {nicho} e identifica un tipo de problema de diseño común que sufran estos negocios. 
+    Propón una estrategia de búsqueda para encontrar 3 clientes ideales que necesiten ayuda.
+  expected_output: >-
+    Un reporte estructurado en texto que contenga: 1. El problema principal de diseño en el nicho. 
+    2. Tres criterios clave para calificar si una web de este nicho es deficiente. 3. Una idea de propuesta de valor.
+  agent: prospectador_agente
