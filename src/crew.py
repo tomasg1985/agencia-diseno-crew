@@ -12,12 +12,14 @@ class AgenciaDisenoCrew():
     
     llm_comercial = LLM(
         model="ollama/llama3.2",
-        base_url="http://localhost:11434"
+        base_url="http://localhost:11434",
+        temperature=0.1,
     )
     
     llm_tecnico = LLM(
         model="ollama/qwen3.5:4b",
-        base_url="http://localhost:11434"
+        base_url="http://localhost:11434",
+        temperature=0.1,
     )
 
     # === REGISTRO DE AGENTES ===

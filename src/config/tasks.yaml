@@ -1,32 +1,59 @@
 buscar_clientes_tarea:
   description: >-
-    Analiza el nicho de {nicho} e identifica un tipo de problema de diseño común que sufran estos negocios. 
-    Propón una estrategia de búsqueda para encontrar 3 clientes ideales que necesiten ayuda.
+    Analiza el nicho de {nicho} e identifica un solo problema de diseño móvil común. 
+    Sé extremadamente breve. No uses más de 30 palabras en total.
+    MOLDE OBLIGATORIO DE RESPUESTA:
+    - Problema: [Una frase corta]
+    - Criterio 1: [3 palabras]
+    - Criterio 2: [3 palabras]
+    - Criterio 3: [3 palabras]
   expected_output: >-
-    Un reporte estructurado que contenga: 1. El problema principal de diseño en el nicho. 
-    2. Tres criterios clave para calificar si una web de este nicho es deficiente.
+    Un reporte ultra-corto que siga exactamente el formato del molde proporcionado.
   agent: prospectador_agente
 
 crear_estrategia_tarea:
   description: >-
-    Toma el reporte de prospección anterior. Crea un concepto creativo para una campaña de video 
-    e incluye un guión técnico corto de 15 segundos diseñado para solucionar ese problema detectado.
+    Toma el reporte anterior y crea un guión técnico corto de 15 segundos para un video de animación.
+    Sé conciso, ve directo al grano.
+    MOLDE OBLIGATORIO DE RESPUESTA:
+    - Concepto: [Idea central]
+    - Segundo 0-5: [Línea corta]
+    - Segundo 5-10: [Línea corta]
+    - Segundo 10-15: [Línea corta]
   expected_output: >-
-    Un guión técnico estructurado con: Tiempo (0-15s), Escena Visual, y Texto/Narración en pantalla.
+    Un guión técnico que cumpla estrictamente con el formato del molde.
   agent: estratega_contenido_agente
 
 generar_codigo_motion_tarea:
   description: >-
-    Toma el guión técnico anterior. Genera la estructura lógica paso a paso para crear un video en Python con la librería Manim. 
-    Define los objetos que deben aparecer (círculos, textos, transiciones) y el orden de ejecución del script de animación.
+    Genera el plan lógico paso a paso para estructurar la animación del guión anterior. 
+    Usa un máximo de 4 viñetas simples y cortas.
   expected_output: >-
-    Un plan técnico detallado que enumere las clases, variables y métodos necesarios para codificar el video.
+    Un plan técnico estructurado en viñetas simples y breves.
   agent: director_motion_agente
 
 preparar_presupuesto_tarea:
   description: >-
-    Toma todo el contexto del caso (el problema, el guión y el plan de video). Redacta un correo electrónico frío de ventas ultra-personalizado 
-    dirigido al dueño del consultorio, ofreciéndole esta solución por un presupuesto base de {presupuesto_base} USD.
+    Toma todo el contexto y redacta el correo frío final. Tienes prohibido improvisar la estructura o repetir palabras.
+    Debes clonar con total precisión el tono y la estructura del EJEMPLO MAESTRO de abajo.
+    
+    EJEMPLO MAESTRO OBLIGATORIO A CLONAR:
+    Asunto: Una observación sobre las consultas que se están perdiendo en tu clínica
+    
+    Hola,
+    
+    Estuve analizando cómo interactúan los pacientes digitales en el sector de {nicho} y detecté una fuga silenciosa de facturación: el 80% de las personas busca dentista desde su teléfono, pero la mayoría de las páginas deforman los botones de contacto o tardan siglos en cargar. 
+    
+    Esto no es un problema estético, es financiero. Cuando una web se rompe en el celular, el paciente asume que el servicio de la clínica es igual de descuidado y salta directo a la competencia. Su clínica puede ser la mejor de la zona, pero digitalmente está regalando pacientes.
+    
+    Para frenar esto de raíz, estructuramos una solución visual directa. Creamos una animación de 15 segundos optimizada específicamente para pantallas móviles, diseñada para capturar la atención en tres segundos, transmitir autoridad médica inmediata y simplificar el proceso de reserva a un solo clic.
+    
+    El presupuesto base para este desarrollo visual y la optimización móvil completa es de {presupuesto_base} USD (una inversión que se recupera por completo captando apenas dos pacientes nuevos).
+    
+    Tengo dos puntos críticos detectados en tu nicho que podrías corregir hoy mismo para detener esta fuga. ¿Te viene bien una breve llamada de 10 minutos este jueves a las 4:00 p.m. para mostrártelos?
+    
+    Un saludo,
+    [Tu Nombre]
   expected_output: >-
-    Un correo electrónico de ventas redactado listo para producción, con Asunto y Cuerpo del mensaje, en un tono persuasivo pero corporativo.
+    El correo electrónico final impecable en español nativo, que clone de forma exacta la estructura, los párrafos y el tono persuasivo del ejemplo, utilizando las variables {nicho} y {presupuesto_base} de forma fluida.
   agent: ejecutivo_cuentas_agente
