@@ -1,14 +1,16 @@
 buscar_clientes_tarea:
   description: >-
-    Analiza el nicho de {nicho} e identifica un solo problema de diseño móvil común. 
-    Sé extremadamente breve. No uses más de 30 palabras en total.
+    USA TU HERRAMIENTA DE BÚSQUEDA para investigar en internet el sector de {nicho}.
+    Extrae un solo problema móvil real.
+    ATENCIÓN: Tienes prohibido incluir logs, pensamientos intermedios o cadenas de ejecución en tu respuesta final. 
+    Entrega únicamente el molde limpio para no saturar la memoria del equipo.
     MOLDE OBLIGATORIO DE RESPUESTA:
     - Problema: [Una frase corta]
     - Criterio 1: [3 palabras]
     - Criterio 2: [3 palabras]
     - Criterio 3: [3 palabras]
   expected_output: >-
-    Un reporte ultra-corto que siga exactamente el formato del molde proporcionado.
+    Un reporte resumido en texto plano que siga estrictamente el formato del molde, libre de metadatos o logs técnicos de la herramienta.
   agent: prospectador_agente
 
 crear_estrategia_tarea:
