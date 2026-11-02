@@ -1,10 +1,19 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from src.crew import AgenciaDisenoCrew
 
 app = FastAPI(
     title="API de la Agencia de Diseño con IA",
     description="Backend para conectar nuestro sistema multiagente local con interfaces web."
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 class SolicitudProspeccion(BaseModel):

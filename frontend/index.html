@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agencia IA - Generador de Prospección</title>
+    <style>
+        /* CSS Moderno Resiliente - Inmune a bloqueos de seguridad locales */
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 100%;
+            max-width: 650px;
+            background-color: #1e293b;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3);
+            border: 1px solid #334155;
+        }
+        h1 { color: #818cf8; margin-top: 0; margin-bottom: 8px; text-align: center; font-size: 28px; }
+        p.subtitle { color: #94a3b8; text-align: center; margin-bottom: 30px; font-size: 14px; margin-top: 0; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-size: 14px; color: #cbd5e1; font-weight: 500; }
+        input {
+            width: 100%;
+            padding: 12px;
+            background-color: #334155;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            color: white;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+        input:focus { outline: 2px solid #6366f1; }
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover { background-color: #4338ca; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        /* Spinner de carga animado */
+        .loading-box { display: none; text-align: center; margin-top: 25px; }
+        .spinner {
+            border: 4px solid rgba(255,255,255,0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #818cf8;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* Tarjeta de resultados */
+        .result-box { display: none; margin-top: 25px; }
+        .result-title { color: #34d399; font-weight: bold; margin-bottom: 10px; font-size: 16px; }
+        pre {
+            background-color: #020617;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #1e293b;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #e2e8f0;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🚀 Agencia de Diseño Multiagente</h1>
+        <p class="subtitle">Genera estrategias y correos de prospección B2B basados en datos reales de Google.</p>
+
+        <form id="formulario-prospeccion">
+            <div class="form-group">
+                <label for="nicho">Nicho de Mercado o Industria</label>
+                <input type="text" id="nicho" required placeholder="Ej: Consultorios Dentales, Gimnasios">
+            </div>
+
+            <div class="form-group">
+                <label for="presupuesto">Presupuesto Base de la Propuesta (USD)</label>
+                <input type="number" id="presupuesto" required placeholder="Ej: 1200">
+            </div>
+
+            <button type="submit" id="boton-enviar">Iniciar Prospección con Agentes</button>
+        </form>
+
+        <div id="estado-carga" class="loading-box">
+            <div class="spinner"></div>
+            <p style="color: #a5b4fc; font-size: 14px; margin: 0;">La tripulación está investigando en Google y analizando el mercado local...</p>
+        </div>
+
+        <div id="resultado-tarjeta" class="result-box">
+            <div class="result-title">✨ Correo Persuasivo Generado con Éxito</div>
+            <pre id="correo-texto"></pre>
+        </div>
+    </div>
+
+        <script>
+        const formulario = document.getElementById('formulario-prospeccion');
+        const botonEnviar = document.getElementById('boton-enviar');
+        const estadoCarga = document.getElementById('estado-carga');
+        const resultadoTarjeta = document.getElementById('resultado-tarjeta');
+        const correoTexto = document.getElementById('correo-texto');
+
+        formulario.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const nichoValor = document.getElementById('nicho').value;
+            const presupuestoValor = parseInt(document.getElementById('presupuesto').value);
+
+            // 1. Cambios de estado visual limpios con display nativo
+            botonEnviar.disabled = true;
+            estadoCarga.style.display = 'block';
+            resultadoTarjeta.style.display = 'none';
+
+            try {
+                // 2. Consultamos a tu endpoint local de FastAPI
+                const respuesta = await fetch('http://localhost:8000/prospectar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        nicho: nichoValor,
+                        presupuesto_base: presupuestoValor
+                    })
+                });
+
+                if (!respuesta.ok) throw new Error(`Error en el servidor: ${respuesta.status}`);
+
+                const data = await respuesta.json();
+                
+                // 3. Inyectamos el texto y mostramos la tarjeta CORREGIDA
+                correoTexto.textContent = data.correo_generado;
+                resultadoTarjeta.style.display = 'block'; // <-- Corregido aquí (sin el doble .style)
+
+            } catch (error) {
+                alert(`Hubo un problema al ejecutar los agentes: ${error.message}`);
+                console.error(error);
+            } finally {
+                // 4. Apagamos el spinner al terminar
+                botonEnviar.disabled = false;
+                estadoCarga.style.display = 'none';
+            }
+        });
+    </script>
+
+</body>
+</html>
